@@ -1,10 +1,10 @@
 import { Suspense } from 'react';
 import Invitation from '@/components/Invitation';
 
-// Contoh tautan tamu: /?to=Bapak%20Budi%20Santoso
+// Contoh: https://domain-anda.com/?to=Nama%20Tamu
 export default function Page() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-deep" />}>
+    <Suspense fallback={<div className="loading-screen">Memuat undangan...</div>}>
       <Invitation />
     </Suspense>
   );

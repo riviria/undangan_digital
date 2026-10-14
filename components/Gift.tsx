@@ -1,36 +1,47 @@
 'use client';
+
 import { useState } from 'react';
-import { Check, Copy } from 'lucide-react';
+import { Check, Copy, Gift as GiftIcon } from 'lucide-react';
 import { invite } from '@/lib/data';
 
 export default function Gift() {
   const [copied, setCopied] = useState<string | null>(null);
+  const [error, setError] = useState('');
 
-  const copy = async (id: string, number: string) => {
-    try { await navigator.clipboard.writeText(number); } catch {}
-    setCopied(id);
-    setTimeout(() => setCopied(null), 1800);
+  const copyNumber = async (id: string, value: string) => {
+    try {
+      if (!navigator.clipboard) throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(value);
+      setCopied(id);
+      setError('');
+      window.setTimeout(() => setCopied((old) => old === id ? null : old), 2200);
+    } catch {
+      setError('Tidak dapat menyalin otomatis. Silakan salin nomor secara manual.');
+    }
   };
 
   return (
-    <section className="bg-deep px-6 py-24">
-      <div className="mx-auto max-w-3xl text-center">
-        <h2 className="font-display text-3xl sm:text-5xl">Tanda kasih</h2>
-        <p className="mx-auto mt-4 max-w-md text-mist">Kehadiran Anda sudah menjadi hadiah terbaik. Bila ingin berbagi kebahagiaan, Anda dapat mengirimkannya ke rekening berikut.</p>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
-          {invite.gifts.map((g) => (
-            <div key={g.id} className="rounded-2xl border border-saffron/30 p-6 text-left">
-              <p className="text-sm text-mist">{g.label}</p>
-              <p className="mt-2 font-display text-2xl tracking-wide">{g.number}</p>
-              <p className="text-sm text-jasmine/80">a.n. {g.holder}</p>
-              <button type="button" onClick={() => copy(g.id, g.number)} className="mt-5 inline-flex items-center gap-2 rounded-full border border-saffron/60 px-4 py-2 text-sm transition hover:bg-saffron hover:text-deep">
-                {copied === g.id ? <Check size={16} /> : <Copy size={16} />}
-                {copied === g.id ? 'Tersalin' : 'Salin nomor'}
-              </button>
-            </div>
-          ))}
-        </div>
+    <section className="gift-section">
+      <div className="section-head">
+        <GiftIcon className="gift-heading-icon" size={28} strokeWidth={1.3} aria-hidden />
+        <p className="eyebrow">Wedding Gift</p>
+        <h2>Tanda <em>kasih</em></h2>
+        <p>Doa restu dan kehadiran Anda adalah hadiah terindah. Jika berkenan memberikan tanda kasih, dapat melalui rekening berikut.</p>
       </div>
+      <div className="gift-grid">
+        {invite.gifts.map((gift) => (
+          <article className="gift-card" key={gift.id}>
+            <div className="gift-card-top"><span>{gift.label}</span><span aria-hidden>✳</span></div>
+            <p className="gift-number">{gift.number}</p>
+            <p className="gift-holder">a.n. {gift.holder}</p>
+            <button type="button" className="gift-copy" onClick={() => copyNumber(gift.id, gift.number)}>
+              {copied === gift.id ? <Check size={15} /> : <Copy size={15} />}
+              {copied === gift.id ? 'Berhasil Disalin' : 'Salin Nomor'}
+            </button>
+          </article>
+        ))}
+      </div>
+      <p className="gift-error" role="status" aria-live="polite">{error}</p>
     </section>
   );
 }

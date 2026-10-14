@@ -1,100 +1,98 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Minus, Plus, Send } from 'lucide-react';
 
-type Wish = { id: number; name: string; attend: boolean; text: string };
+import { useEffect, useState, type FormEvent } from 'react';
+import { Check, Minus, Plus, Send } from 'lucide-react';
 
-const SEED: Wish[] = [
-  { id: 1, name: 'Keluarga Hartono', attend: true, text: 'Selamat menempuh hidup baru. Semoga langgeng dan bahagia.' },
-  { id: 2, name: 'Dinda & Fajar', attend: true, text: 'Tidak sabar bertemu di Yogyakarta!' },
+type Wish = { id: number; name: string; attend: boolean; text: string; count: number };
+const KEY = 'raisa-arjuna-ucapan-v2';
+const STARTER: Wish[] = [
+  { id: 1, name: 'Keluarga Hartono', attend: true, count: 2, text: 'Selamat menempuh hidup baru. Semoga senantiasa dilimpahkan kebahagiaan.' },
+  { id: 2, name: 'Dinda & Fajar', attend: true, count: 2, text: 'Bahagia selalu untuk kalian berdua. Semoga semuanya lancar!' },
 ];
-const KEY = 'undangan-ucapan';
 
 export default function Rsvp({ guest }: { guest: string }) {
   const [name, setName] = useState(guest === 'Tamu Undangan' ? '' : guest);
   const [attend, setAttend] = useState(true);
   const [count, setCount] = useState(1);
-  const [text, setText] = useState('');
-  const [wishes, setWishes] = useState<Wish[]>(SEED);
-  const [sent, setSent] = useState(false);
+  const [message, setMessage] = useState('');
+  const [wishes, setWishes] = useState<Wish[]>(STARTER);
+  const [status, setStatus] = useState('');
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem(KEY);
-      if (raw) setWishes(JSON.parse(raw));
-    } catch {}
+      const saved = window.localStorage.getItem(KEY);
+      if (!saved) return;
+      const parsed: unknown = JSON.parse(saved);
+      if (Array.isArray(parsed)) {
+        const safe = parsed.filter((w): w is Wish => w && typeof w.name === 'string' && typeof w.text === 'string' && typeof w.attend === 'boolean' && typeof w.id === 'number' && typeof w.count === 'number');
+        setWishes([...safe.slice(0, 40), ...STARTER]);
+      }
+    } catch { /* Storage might be unavailable in private browsing. */ }
   }, []);
 
-  const submit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!name.trim()) return;
-    // TODO: kirim ke API Anda (Route Handler, Supabase, Google Sheets, dsb.)
-    const next = [{ id: Date.now(), name: name.trim(), attend, text: text.trim() }, ...wishes];
-    setWishes(next);
-    try { localStorage.setItem(KEY, JSON.stringify(next)); } catch {}
-    setSent(true);
-    setText('');
-    if (attend) {
-      const confetti = (await import('canvas-confetti')).default;
-      const colors = ['#F4B73F', '#D4577A', '#F4F1FF'];
-      confetti({ particleCount: 90, spread: 70, origin: { y: 0.7 }, colors });
-      setTimeout(() => confetti({ particleCount: 60, angle: 120, spread: 60, origin: { x: 1, y: 0.7 }, colors }), 200);
+    const newWish: Wish = { id: Date.now(), name: name.trim().slice(0, 70), attend, count: attend ? count : 0, text: message.trim().slice(0, 320) };
+    const previousPersonal = wishes.filter((w) => w.id > 2);
+    const personal = [newWish, ...previousPersonal].slice(0, 40);
+    setWishes([...personal, ...STARTER]);
+    try {
+      window.localStorage.setItem(KEY, JSON.stringify(personal));
+      setStatus('Terima kasih. Konfirmasi ini tersimpan di perangkat Anda.');
+    } catch {
+      setStatus('Terima kasih. Ucapan tampil pada halaman ini, tetapi penyimpanan lokal tidak tersedia.');
     }
+    setMessage('');
   };
 
-  const field = 'w-full rounded-xl border border-mist/30 bg-deep/70 px-4 py-3 text-jasmine placeholder:text-mist/60 focus:border-saffron focus:outline-none';
-
   return (
-    <section className="batik bg-night px-6 py-24">
-      <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-2">
-        <form onSubmit={submit} className="rounded-3xl border border-saffron/30 bg-deep/80 p-6 backdrop-blur sm:p-8">
-          <h2 className="font-display text-3xl sm:text-4xl">Konfirmasi kehadiran</h2>
-          <label className="mt-6 block text-sm text-mist" htmlFor="nama">Nama</label>
-          <input id="nama" required value={name} onChange={(e) => setName(e.target.value)} className={`${field} mt-1`} placeholder="Nama lengkap" />
+    <section id="ucapan" className="rsvp-section">
+      <div className="rsvp-container">
+        <div className="section-head section-head-light">
+          <p className="eyebrow eyebrow-light">Wishes &amp; Prayers</p>
+          <h2>Kirim doa <em>&amp; ucapan</em></h2>
+          <p>Kehadiran dan doa Anda adalah hadiah yang paling berarti bagi kami.</p>
+        </div>
+        <div className="rsvp-grid">
+          <form className="rsvp-form" onSubmit={handleSubmit}>
+            <label htmlFor="guest-name">Nama Lengkap</label>
+            <input id="guest-name" type="text" autoComplete="name" placeholder="Nama Anda" value={name} maxLength={70} required onChange={(e) => setName(e.target.value)} />
 
-          <div className="mt-5 grid grid-cols-2 gap-2 rounded-full bg-night p-1" role="radiogroup" aria-label="Kehadiran">
-            {[true, false].map((v) => (
-              <button key={String(v)} type="button" role="radio" aria-checked={attend === v} onClick={() => setAttend(v)}
-                className={`rounded-full px-4 py-2 text-sm transition ${attend === v ? 'bg-saffron text-deep' : 'text-mist'}`}>
-                {v ? 'Saya hadir' : 'Belum bisa hadir'}
-              </button>
-            ))}
-          </div>
-
-          {attend && (
-            <div className="mt-5 flex items-center justify-between">
-              <span className="text-sm text-mist">Jumlah tamu</span>
-              <div className="flex items-center gap-4">
-                <button type="button" aria-label="Kurangi" onClick={() => setCount((c) => Math.max(1, c - 1))} className="grid h-10 w-10 place-items-center rounded-full border border-mist/40"><Minus size={16} /></button>
-                <span className="w-6 text-center font-display text-2xl">{count}</span>
-                <button type="button" aria-label="Tambah" onClick={() => setCount((c) => Math.min(5, c + 1))} className="grid h-10 w-10 place-items-center rounded-full border border-mist/40"><Plus size={16} /></button>
-              </div>
+            <span className="rsvp-label">Konfirmasi Kehadiran</span>
+            <div className="attendance-options" role="group" aria-label="Konfirmasi kehadiran">
+              <button type="button" className={attend ? 'chosen' : ''} aria-pressed={attend} onClick={() => setAttend(true)}>InsyaAllah Hadir</button>
+              <button type="button" className={!attend ? 'chosen' : ''} aria-pressed={!attend} onClick={() => setAttend(false)}>Belum Bisa Hadir</button>
             </div>
-          )}
 
-          <label className="mt-5 block text-sm text-mist" htmlFor="ucapan">Ucapan dan doa</label>
-          <textarea id="ucapan" rows={4} value={text} onChange={(e) => setText(e.target.value)} className={`${field} mt-1 resize-none`} placeholder="Tulis ucapan untuk kedua mempelai" />
+            {attend && (
+              <div className="guest-count-row">
+                <span>Jumlah tamu</span>
+                <div className="count-stepper">
+                  <button type="button" aria-label="Kurangi tamu" disabled={count === 1} onClick={() => setCount((n) => Math.max(1, n - 1))}><Minus size={17} /></button>
+                  <strong>{count}</strong>
+                  <button type="button" aria-label="Tambah tamu" disabled={count === 5} onClick={() => setCount((n) => Math.min(5, n + 1))}><Plus size={17} /></button>
+                </div>
+              </div>
+            )}
 
-          <button type="submit" className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-rosewood px-6 py-3 font-semibold transition hover:brightness-110">
-            <Send size={16} /> Kirim konfirmasi
-          </button>
-          <p aria-live="polite" className="mt-3 min-h-5 text-center text-sm text-saffron">{sent ? 'Terkirim. Terima kasih sudah mengonfirmasi.' : ''}</p>
-        </form>
-
-        <div>
-          <h2 className="font-display text-3xl sm:text-4xl">Ucapan untuk kami</h2>
-          <ul className="mt-6 max-h-[28rem] space-y-3 overflow-y-auto pr-1">
-            <AnimatePresence initial={false}>
-              {wishes.map((w) => (
-                <motion.li key={w.id} layout initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} className="rounded-2xl border border-mist/20 bg-deep/70 p-4">
-                  <p className="font-semibold">{w.name}</p>
-                  <p className="text-xs text-mist">{w.attend ? 'Hadir' : 'Belum bisa hadir'}</p>
-                  {w.text && <p className="mt-2 break-words text-jasmine/90">{w.text}</p>}
-                </motion.li>
+            <label htmlFor="guest-wish">Ucapan &amp; Doa</label>
+            <textarea id="guest-wish" placeholder="Tulis doa terbaik Anda di sini..." rows={4} maxLength={320} value={message} onChange={(e) => setMessage(e.target.value)} />
+            <button type="submit" className="rsvp-submit"><Send size={16} aria-hidden /> Kirim Ucapan</button>
+            <p className="form-status" role="status" aria-live="polite">{status}</p>
+            <p className="form-note">Mode demo: ucapan disimpan di browser ini. Hubungkan ke database untuk menerima konfirmasi dari semua tamu.</p>
+          </form>
+          <div className="wishes-panel">
+            <div className="wishes-heading"><h3>Doa dari orang terkasih</h3><span>{wishes.length} ucapan</span></div>
+            <div className="wishes-list">
+              {wishes.map((wish) => (
+                <article className="wish-card" key={wish.id}>
+                  <div className="wish-card-top"><span className="wish-avatar" aria-hidden>{wish.name[0]?.toUpperCase() || 'T'}</span><div><h4>{wish.name}</h4><p>{wish.attend ? `Hadir${wish.count > 0 ? ` · ${wish.count} tamu` : ''}` : 'Belum bisa hadir'}</p></div><Check size={16} aria-label="Tercatat" /></div>
+                  {wish.text && <p className="wish-copy">{wish.text}</p>}
+                </article>
               ))}
-            </AnimatePresence>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -5,16 +5,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        deep: '#0A0D26',
-        night: '#12163A',
-        saffron: '#F4B73F',
-        jasmine: '#F4F1FF',
-        rosewood: '#D4577A',
-        mist: '#A9AEDB',
+        paper: '#f8f6ef',
+        cream: '#efece3',
+        forest: '#2d3b32',
+        olive: '#657160',
+        gold: '#b69b78',
       },
       fontFamily: {
-        display: ['var(--font-display)', 'serif'],
-        body: ['var(--font-body)', 'sans-serif'],
+        display: ['Cormorant Garamond', 'Georgia', 'serif'],
+        body: ['DM Sans', 'sans-serif'],
       },
     },
   },

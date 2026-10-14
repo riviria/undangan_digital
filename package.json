@@ -1,10 +1,13 @@
 {
   "name": "undangan-digital",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "scripts": { "dev": "next dev", "build": "next build", "start": "next start" },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
   "dependencies": {
-    "canvas-confetti": "^1.9.3",
     "framer-motion": "^11.11.0",
     "lucide-react": "^0.453.0",
     "next": "14.2.15",
@@ -12,7 +15,6 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/canvas-confetti": "^1.6.4",
     "@types/node": "^20.14.0",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",

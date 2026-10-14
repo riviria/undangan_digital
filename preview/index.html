@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f8f6ef" />
+  <meta name="description" content="Undangan pernikahan Raisa dan Arjuna, Sabtu 12 Desember 2026." />
+  <title>The Wedding of Raisa &amp; Arjuna</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="../app/globals.css" rel="stylesheet" />
+  <style>
+    .demo-icon { font-size: 17px; }
+    .demo-count { font-family: var(--serif); font-size: 26px; }
+    .lightbox[hidden] { display: none; }
+    .cover-screen { transition: opacity .8s ease, transform .8s ease; }
+    .cover-screen.is-exiting { opacity: 0; transform: scale(1.035); pointer-events: none; }
+    .bottom-nav[hidden] { display: none; }
+  </style>
+</head>
+<body style="overflow:hidden">
+  <div id="cover" class="cover-screen" role="dialog" aria-modal="true" aria-labelledby="cover-heading">
+    <img class="cover-image" src="../public/images/cover.webp" alt="Foto pasangan pengantin di taman" />
+    <div class="cover-overlay"></div><div class="cover-frame" aria-hidden="true"></div>
+    <div class="cover-top"><span class="demo-icon" aria-hidden="true">♡</span><p>The Wedding Celebration</p></div>
+    <div class="cover-main"><p class="cover-kicker">Dengan penuh cinta mengundang Anda</p><h1 id="cover-heading"><span>Raisa</span><em>&amp;</em><span>Arjuna</span></h1><span class="cover-decor">✧</span><p class="cover-date">Sabtu, 12 Desember 2026</p></div>
+    <div class="cover-bottom"><p class="cover-to">Kepada Yth. Bapak/Ibu/Saudara/i</p><p class="cover-guest" id="cover-guest">Tamu Undangan</p><p class="cover-place">di tempat</p><button class="cover-button" type="button" id="open-cover"><span>Buka Undangan</span><span aria-hidden="true">↗</span></button><p class="cover-note">Kami menantikan kehadiran dan doa restu Anda.</p></div>
+  </div>
+
+  <main class="site-shell">
+    <section id="beranda" class="hero-section"><div class="hero-inner"><div class="hero-intro"><div class="hero-eyebrow"><span class="small-rule"></span>The Wedding Of<span class="small-rule"></span></div><h2>Raisa<span class="hero-amp">&amp;</span>Arjuna</h2><div class="hero-line">✦</div><p class="hero-description">Dua hati, satu perjalanan. Dengan penuh rasa syukur, kami mengundang Anda untuk menjadi bagian dari hari istimewa kami.</p><p class="hero-date">Sabtu, 12 Desember 2026</p><p class="hero-city">Yogyakarta, Indonesia</p><a class="hero-discover" href="#mempelai">Jelajahi kisah kami <span aria-hidden="true">↘</span></a></div><div class="hero-picture-wrap"><div class="hero-picture-back"></div><div class="hero-picture"><img class="hero-picture-img" src="../public/images/cover.webp" alt="Raisa dan Arjuna di taman" /></div><p class="hero-picture-caption">TWO SOULS, ONE STORY <span>·</span> 12 . 12 . 2026</p></div></div></section>
+
+    <section class="verse-section" aria-label="Doa pernikahan"><div class="section-symbol" aria-hidden="true">✦</div><p class="eyebrow">Bismillahirrahmanirrahim</p><p class="verse-copy">“Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu agar kamu merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang.”</p><p class="verse-source">QS. Ar-Rum : 21</p></section>
+
+    <section id="mempelai" class="couple-section"><div class="section-head"><p class="eyebrow">Assalamu’alaikum Warahmatullahi Wabarakatuh</p><h2>Dengan penuh <em>bahagia</em></h2><p>Atas rahmat dan karunia Allah SWT, dengan segala kerendahan hati kami mengundang Bapak/Ibu/Saudara/i untuk hadir di hari pernikahan kami.</p></div><div class="couple-grid">
+      <figure class="couple-person"><div class="couple-portrait-border"><div class="couple-portrait"><img src="../public/images/bride.webp" alt="Foto Raisa" /></div></div><figcaption><p class="couple-role">Mempelai Wanita</p><h3>Raisa Maharani, S.Ds.</h3><div class="couple-divider">✧</div><p>Putri kedua dari Bapak Haryanto dan Ibu Sulastri</p></figcaption></figure>
+      <figure class="couple-person"><div class="couple-portrait-border"><div class="couple-portrait"><img src="../public/images/groom.webp" alt="Foto Arjuna" /></div></div><figcaption><p class="couple-role">Mempelai Pria</p><h3>Arjuna Pratama, S.T.</h3><div class="couple-divider">✧</div><p>Putra pertama dari Bapak Wibowo dan Ibu Retno</p></figcaption></figure><span class="couple-join" aria-hidden="true">&amp;</span>
+    </div></section>
+
+    <section class="countdown-section"><div class="countdown-inner"><p class="eyebrow eyebrow-light">Save The Date</p><h2>Menuju hari <em>bahagia</em></h2><p class="countdown-date">Sabtu, 12 Desember 2026</p><div class="countdown-grid" role="timer"><div class="countdown-item"><span id="days">00</span><small>Hari</small></div><div class="countdown-item"><span id="hours">00</span><small>Jam</small></div><div class="countdown-item"><span id="minutes">00</span><small>Menit</small></div><div class="countdown-item"><span id="seconds">00</span><small>Detik</small></div></div></div></section>
+
+    <section id="acara" class="events-section"><div class="section-head"><p class="eyebrow">Rangkaian Acara</p><h2>Hari yang kami <em>nantikan</em></h2><p>Merupakan suatu kehormatan bagi kami apabila Anda berkenan hadir dan membersamai kebahagiaan ini.</p></div><div class="events-grid">
+      <article class="event-card"><div class="event-ornament">✧</div><p class="event-num">01 / THE CELEBRATION</p><h3>Akad Nikah</h3><div class="event-date"><span>Desember</span><strong>12</strong><span>2026</span></div><p class="event-day">Sabtu, 12 Desember 2026</p><p class="event-time">◷ &nbsp; 09.00 WIB sampai selesai</p><div class="event-separator"></div><p class="event-loc-label">⌖ &nbsp; Bertempat di</p><h4>Pendopo Taman Sari Kencana</h4><p class="event-address">Jl. Kaliurang Km 12, Sleman, Yogyakarta</p><a class="event-map" href="https://www.google.com/maps/search/?api=1&query=Pendopo+Taman+Sari+Kencana+Sleman" target="_blank" rel="noopener noreferrer">Lihat Lokasi ↗</a></article>
+      <article class="event-card"><div class="event-ornament">✧</div><p class="event-num">02 / THE CELEBRATION</p><h3>Resepsi</h3><div class="event-date"><span>Desember</span><strong>12</strong><span>2026</span></div><p class="event-day">Sabtu, 12 Desember 2026</p><p class="event-time">◷ &nbsp; 11.00 sampai 14.00 WIB</p><div class="event-separator"></div><p class="event-loc-label">⌖ &nbsp; Bertempat di</p><h4>Pendopo Taman Sari Kencana</h4><p class="event-address">Jl. Kaliurang Km 12, Sleman, Yogyakarta</p><a class="event-map" href="https://www.google.com/maps/search/?api=1&query=Pendopo+Taman+Sari+Kencana+Sleman" target="_blank" rel="noopener noreferrer">Lihat Lokasi ↗</a></article>
+    </div><div class="event-calendar-wrap"><button type="button" class="calendar-button" id="save-calendar">▣ &nbsp; Simpan ke Kalender</button><p>Ketuk untuk menyimpan tanggal istimewa kami.</p></div></section>
+
+    <section class="guest-pass-section" aria-label="Undangan tamu"><div class="guest-pass"><span class="demo-icon">♡</span><p class="eyebrow">Special Invitation</p><p class="guest-pass-for">Undangan ini kami tujukan dengan hormat kepada</p><h2 id="pass-guest">Tamu Undangan</h2><p>Semoga kita dapat berbagi tawa, doa, dan kenangan indah pada hari bahagia kami.</p><div class="guest-pass-rule"></div><span>Raisa &amp; Arjuna <i>·</i> 12 . 12 . 2026</span></div></section>
+
+    <section id="foto" class="gallery-section" aria-label="Foto-foto pengantin"><div class="gallery-grid" id="photos">
+      <button type="button" class="gallery-tile gallery-tile-1" data-photo="0" aria-label="Lihat foto 1"><img src="../public/images/gallery/1.webp" alt="Foto pengantin 1" loading="lazy" /><span class="gallery-tile-plus">+</span></button>
+      <button type="button" class="gallery-tile gallery-tile-2" data-photo="1" aria-label="Lihat foto 2"><img src="../public/images/gallery/2.webp" alt="Foto pengantin 2" loading="lazy" /><span class="gallery-tile-plus">+</span></button>
+      <button type="button" class="gallery-tile gallery-tile-3" data-photo="2" aria-label="Lihat foto 3"><img src="../public/images/gallery/3.webp" alt="Foto pengantin 3" loading="lazy" /><span class="gallery-tile-plus">+</span></button>
+      <button type="button" class="gallery-tile gallery-tile-4" data-photo="3" aria-label="Lihat foto 4"><img src="../public/images/gallery/4.webp" alt="Foto pengantin 4" loading="lazy" /><span class="gallery-tile-plus">+</span></button>
+      <button type="button" class="gallery-tile gallery-tile-5" data-photo="4" aria-label="Lihat foto 5"><img src="../public/images/gallery/5.webp" alt="Foto pengantin 5" loading="lazy" /><span class="gallery-tile-plus">+</span></button>
+      <button type="button" class="gallery-tile gallery-tile-6" data-photo="5" aria-label="Lihat foto 6"><img src="../public/images/gallery/6.webp" alt="Foto pengantin 6" loading="lazy" /><span class="gallery-tile-plus">+</span></button>
+      <button type="button" class="gallery-tile gallery-tile-7" data-photo="6" aria-label="Lihat foto 7"><img src="../public/images/gallery/7.webp" alt="Foto pengantin 7" loading="lazy" /><span class="gallery-tile-plus">+</span></button>
+      <button type="button" class="gallery-tile gallery-tile-8" data-photo="7" aria-label="Lihat foto 8"><img src="../public/images/gallery/8.webp" alt="Foto pengantin 8" loading="lazy" /><span class="gallery-tile-plus">+</span></button>
+    </div></section>
+
+    <section id="ucapan" class="rsvp-section"><div class="rsvp-container"><div class="section-head section-head-light"><p class="eyebrow eyebrow-light">Wishes &amp; Prayers</p><h2>Kirim doa <em>&amp; ucapan</em></h2><p>Kehadiran dan doa Anda adalah hadiah yang paling berarti bagi kami.</p></div><div class="rsvp-grid"><form id="rsvp" class="rsvp-form"><label for="guest-name">Nama Lengkap</label><input id="guest-name" name="guest-name" type="text" placeholder="Nama Anda" required maxlength="70" /><span class="rsvp-label">Konfirmasi Kehadiran</span><div class="attendance-options"><button type="button" class="chosen" id="attend-yes">InsyaAllah Hadir</button><button type="button" id="attend-no">Belum Bisa Hadir</button></div><div class="guest-count-row" id="count-container"><span>Jumlah tamu</span><div class="count-stepper"><button type="button" id="minus" aria-label="Kurangi tamu">−</button><strong id="guest-count">1</strong><button type="button" id="plus" aria-label="Tambah tamu">+</button></div></div><label for="guest-wish">Ucapan &amp; Doa</label><textarea id="guest-wish" placeholder="Tulis doa terbaik Anda di sini..." maxlength="320" rows="4"></textarea><button type="submit" class="rsvp-submit">↗ &nbsp; Kirim Ucapan</button><p class="form-status" id="form-status" role="status"></p><p class="form-note">Mode demo: ucapan disimpan di browser ini. Hubungkan ke database untuk menerima konfirmasi dari semua tamu.</p></form><div class="wishes-panel"><div class="wishes-heading"><h3>Doa dari orang terkasih</h3><span id="wish-total">2 ucapan</span></div><div class="wishes-list" id="wish-list"></div></div></div></div></section>
+
+    <section class="gift-section"><div class="section-head"><span class="gift-heading-icon">✳</span><p class="eyebrow">Wedding Gift</p><h2>Tanda <em>kasih</em></h2><p>Doa restu dan kehadiran Anda adalah hadiah terindah. Jika berkenan memberikan tanda kasih, dapat melalui rekening berikut.</p></div><div class="gift-grid"><article class="gift-card"><div class="gift-card-top"><span>Bank BCA</span><span>✳</span></div><p class="gift-number">1234567890</p><p class="gift-holder">a.n. Raisa Maharani</p><button class="gift-copy" type="button" data-copy="1234567890">▢ &nbsp; Salin Nomor</button></article><article class="gift-card"><div class="gift-card-top"><span>DANA / GoPay</span><span>✳</span></div><p class="gift-number">081200001234</p><p class="gift-holder">a.n. Arjuna Pratama</p><button class="gift-copy" type="button" data-copy="081200001234">▢ &nbsp; Salin Nomor</button></article></div><p class="gift-error" id="gift-error" role="status"></p></section>
+
+    <footer class="closing-section"><img class="closing-image" src="../public/images/closing.webp" alt="Momen hangat kedua mempelai" loading="lazy" /><div class="closing-content"><p class="eyebrow eyebrow-light">Dengan segenap hati</p><h2>Terima Kasih</h2><p>Merupakan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p><p class="closing-names">Raisa <span>&amp;</span> Arjuna</p><div class="closing-rule"></div><p class="closing-credit">Made with love · 2026</p></div></footer>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Navigasi undangan" id="nav" hidden><a class="nav-link" href="#beranda"><span class="demo-icon">⌂</span><span>Awal</span></a><a class="nav-link" href="#mempelai"><span class="demo-icon">♡</span><span>Kami</span></a><a class="nav-link" href="#acara"><span class="demo-icon">▦</span><span>Acara</span></a><a class="nav-link" href="#foto"><span class="demo-icon">▣</span><span>Foto</span></a><a class="nav-link" href="#ucapan"><span class="demo-icon">♧</span><span>Ucapan</span></a></nav>
+
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Foto pengantin" hidden><div class="lightbox-top"><span id="lightbox-counter">01 / 08</span><button type="button" class="lightbox-close" id="lightbox-close" aria-label="Tutup foto">×</button></div><button type="button" class="lightbox-prev" id="lightbox-prev" aria-label="Foto sebelumnya">←</button><div class="lightbox-picture"><img id="lightbox-image" alt="Foto pengantin yang diperbesar" /></div><button type="button" class="lightbox-next" id="lightbox-next" aria-label="Foto selanjutnya">→</button></div>
+
+  <script src="./main.js" defer></script>
+</body>
+</html>
